@@ -123,18 +123,18 @@ function Main() {
                     <Card className={classes.card}>
                         <CardContent>
                             <Grid container spacing={2} alignItems="center" justify={"center"}>
-                                <Grid item md={4}>
+                                <Grid item md={4} sm={12} xs={12}>
                                     <Paper elevation={0} variant="outlined" className={classes.box}>
                                         <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                            <Grid item md={10}>
+                                            <Grid item md={10} sm={9} xs={9}>
                                                 <Typography variant={"body1"}
                                                             className={classes.bodyText}>APY</Typography>
                                             </Grid>
-                                            <Grid item md={2} className={classes.helpIconGrid}>
+                                            <Grid item md={2} sm={3} xs={3} className={classes.helpIconGrid}>
                                                 <BootstrapTooltip title={longText} placement="top">
                                                     <HelpOutline className={classes.helpIcon}/>
                                                 </BootstrapTooltip> </Grid>
-                                            <Grid item md={12}>
+                                            <Grid item md={12} sm={12} xs={12}>
                                                 <Typography variant={"body1"}
                                                             className={classes.price}>240.43%</Typography>
                                             </Grid>
@@ -143,20 +143,20 @@ function Main() {
                                     </Paper>
                                 </Grid>
 
-                                <Grid item md={4}>
+                                <Grid item md={4} sm={12} xs={12}>
                                     <Paper elevation={0} variant="outlined" className={classes.box}>
                                         <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                            <Grid item md={10}>
+                                            <Grid item md={10} sm={9} xs={9}>
                                                 <Typography variant={"body1"}
                                                             className={classes.bodyText}>Reward Multiplier
                                                 </Typography>
                                             </Grid>
-                                            <Grid item md={2} className={classes.helpIconGrid}>
+                                            <Grid item md={2} sm={3} xs={3} className={classes.helpIconGrid}>
                                                 <BootstrapTooltip title={longText} placement="top">
                                                     <HelpOutline className={classes.helpIcon}/>
                                                 </BootstrapTooltip>
                                             </Grid>
-                                            <Grid item md={12}>
+                                            <Grid item md={12} sm={12} xs={12}>
                                                 <Typography variant={"body1"}
                                                             className={classes.price}>1.0x
                                                 </Typography>
@@ -165,19 +165,19 @@ function Main() {
                                     </Paper>
                                 </Grid>
 
-                                <Grid item md={4}>
+                                <Grid item md={4} sm={12} xs={12}>
                                     <Paper elevation={0} variant="outlined" className={classes.box}>
                                         <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                            <Grid item md={10}>
+                                            <Grid item md={10} sm={9} xs={9}>
                                                 <Typography variant={"body1"}
                                                             className={classes.bodyText}>Accrued Rewards
                                                 </Typography>
                                             </Grid>
-                                            <Grid item md={2} className={classes.helpIconGrid}>
+                                            <Grid item md={2} sm={3} xs={3} className={classes.helpIconGrid}>
                                                 <BootstrapTooltip title={longText} placement="top">
                                                     <HelpOutline className={classes.helpIcon}/>
                                                 </BootstrapTooltip> </Grid>
-                                            <Grid item md={12}>
+                                            <Grid item md={12} sm={12} xs={12}>
                                                 <Typography variant={"body1"}
                                                             className={classes.price}>0.00 AMPL
                                                 </Typography>

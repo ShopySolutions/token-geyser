@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     },
     backdrop: {
         color: '#000',
-        backgroundColor:"#fff"
+        backgroundColor: "#fff"
     }
 }));
 
@@ -165,7 +165,7 @@ function Withdraw() {
                 </Backdrop>
             ) : (
                 <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
-                    <Grid item md={12}>
+                    <Grid item md={12} sm={12} xs={12}>
                         <Typography variant={"body1"} className={classes.amount}>Deposited: 0.000000&nbsp;<span
                             className="small-text">(MOON-V1-BZRX-AMPL)</span></Typography>
                         <FormControl className={classes.margin} fullWidth={true}>
@@ -175,15 +175,15 @@ function Withdraw() {
                     </Grid>
 
 
-                    <Grid item md={6}>
+                    <Grid item md={6} sm={12} xs={12}>
                         <Paper elevation={0} variant="elevation" className={classes.box}>
                             <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                <Grid item md={12}>
+                                <Grid item md={12} sm={12} xs={12}>
                                     <Typography variant={"body1"}
                                                 className={classes.bodyText}>Amount to Withdraw
                                     </Typography>
                                 </Grid>
-                                <Grid item md={12}>
+                                <Grid item md={12} sm={12} xs={12}>
                                     <Typography variant={"body1"}
                                                 className={classes.price}>0 $MOON-V1-BZRX-AMPL
                                     </Typography>
@@ -191,15 +191,15 @@ function Withdraw() {
                             </Grid>
                         </Paper>
                     </Grid>
-                    <Grid item md={6}>
+                    <Grid item md={6} sm={12} xs={12}>
                         <Paper elevation={0} variant="elevation" className={classes.box}>
                             <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                <Grid item md={12}>
+                                <Grid item md={12} sm={12} xs={12}>
                                     <Typography variant={"body1"}
                                                 className={classes.bodyText}>Rewards Claimed
                                     </Typography>
                                 </Grid>
-                                <Grid item md={12}>
+                                <Grid item md={12} sm={12} xs={12}>
                                     <Typography variant={"body1"}
                                                 className={classes.price}>0.00 AMPL
                                     </Typography>
@@ -210,16 +210,16 @@ function Withdraw() {
 
 
                     {connected === false ? (
-                        <Grid item md={12}>
+                        <Grid item md={12} sm={12} xs={12}>
                             <Paper elevation={0} variant="elevation" className={classes.connectBox}>
                                 <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                    <Grid item md={10}>
+                                    <Grid item md={10} sm={8} xs={8}>
                                         <Typography variant={"body1"} className={classes.connectText}>Connect your
                                             ethereum
                                             wallet
                                         </Typography>
                                     </Grid>
-                                    <Grid item md={2}>
+                                    <Grid item md={2} sm={4} xs={4}>
                                         <Button size={"large"} variant={"contained"} fullWidth={true}
                                                 onClick={() => setOpenAccountPopUp(true)}
                                                 className={classes.connectButton}>CONNECT</Button>
@@ -231,10 +231,10 @@ function Withdraw() {
 
 
                     {value !== null ? (
-                        <Grid item md={12}>
+                        <Grid item md={12} sm={12} xs={12}>
                             <Paper elevation={0} variant="elevation" className={classes.connectBox}>
                                 <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                    <Grid item md={12}>
+                                    <Grid item md={12} sm={12} xs={12}>
                                         <Typography variant={"body1"} className={classes.connectText}>Cannot withdraw
                                             more than
                                             your deposit
@@ -245,7 +245,7 @@ function Withdraw() {
                         </Grid>
                     ) : ""}
 
-                    <Grid item md={12}>
+                    <Grid item md={12} sm={12} xs={12}>
                         <Button size={"large"} variant={"contained"} fullWidth={true}
                                 className={classes.withdraw}>WITHDRAW</Button>
                     </Grid>

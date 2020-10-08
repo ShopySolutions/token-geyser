@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     backdrop: {
         color: '#000',
-        backgroundColor:"#fff"
+        backgroundColor: "#fff"
     }
 }));
 
@@ -93,15 +93,15 @@ function Stats() {
             ) : (
                 <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
                     {items.map((item, index) => (
-                        <Grid item md={6} key={index}>
+                        <Grid item md={6} sm={6} xs={12} key={index}>
                             <Paper elevation={0} variant="elevation" className={classes.box}>
                                 <Grid container spacing={0} alignItems="center" justify={"center"}>
-                                    <Grid item md={12}>
+                                    <Grid item md={12} sm={12} xs={12}>
                                         <Typography variant={"body1"}
                                                     className={classes.bodyText}>{item.name}
                                         </Typography>
                                     </Grid>
-                                    <Grid item md={12}>
+                                    <Grid item md={12} sm={12} xs={12}>
                                         <Typography variant={"body1"}
                                                     className={classes.price}>{item.price}
                                         </Typography>

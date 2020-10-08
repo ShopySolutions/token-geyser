@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
         backgroundColor: 'rgb(255, 255, 255)',
+
     },
     toolbar: {
         flexWrap: 'wrap',
@@ -63,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'uppercase',
         backgroundColor: '#FF2D55',
         boxShadow: 'none',
+        marginTop:"8px",
+        marginBottom:"8px",
         "&:hover": {
             color: 'white',
             textTransform: 'uppercase',
