@@ -68,10 +68,10 @@ const useStyles = makeStyles((theme) => ({
     },
     tabsStyle: {
         backgroundColor: "#000",
-        color: '#fff',
+        color: '#777',
         borderRadius: "8px",
         '& .MuiTab-textColorPrimary': {
-            color: '#fff',
+            color: '#777',
             fontWeight: "bold"
         },
         '& .MuiTab-textColorPrimary.Mui-selected': {

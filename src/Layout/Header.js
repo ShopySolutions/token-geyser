@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import {InputBase} from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import {TokenGeyserContext} from "../Context/TokenGeyserContext";
+import CoinBase from "../images/CoinBase.svg";
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -28,12 +29,16 @@ const useStyles = makeStyles((theme) => ({
     toolbarTitle: {
         flexGrow: 1,
     },
+    headerTitle: {
+        display: 'flex',
+    },
     link: {
         margin: theme.spacing(1, 1.5),
     },
     select: {
         marginLeft: '20px',
-        minWidth: '150px'
+        minWidth: '150px',
+
     },
     walletButton: {
         minWidth: '150px',
@@ -58,12 +63,26 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'uppercase',
         backgroundColor: '#FF2D55',
         boxShadow: 'none',
-        "&:hover":{
+        "&:hover": {
             color: 'white',
             textTransform: 'uppercase',
             backgroundColor: '#FF2D55',
             boxShadow: 'none',
         }
+    },
+
+    icon: {
+        marginLeft: "10px",
+        height: "26px",
+        cursor: "pointer"
+    },
+    itemText: {
+        textTransform: 'uppercase',
+        fontSize: '10px',
+        fontWeight: 'bold',
+        fontFamily: 'Avenir',
+        left: '45px',
+        top: '10px'
     }
 
 }));
@@ -76,12 +95,12 @@ const BootstrapInput = withStyles((theme) => ({
         },
     },
     input: {
-        borderRadius: 4,
+        borderRadius: 10,
         position: 'relative',
         backgroundColor: theme.palette.background.paper,
         border: '1px solid #ced4da',
         fontSize: 16,
-        padding: '10px 26px 10px 12px',
+        padding: '4px 26px 4px 12px',
         transition: theme.transitions.create(['border-color', 'box-shadow']),
         // Use the system font instead of the default Roboto font.
         fontFamily: [
@@ -151,27 +170,37 @@ function Header() {
     const handleChange = (item) => {
         setSelected(item.target.value)
     }
+
+    const handleGo = () => {
+        window.location.href = "https://app.uniswap.org/#/add/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/0xD46bA6D942050d489DBd938a2C909A5d5039A161"
+    }
+
     return (
 
         <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
-                <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-                    Geyser
-                    <FormControl className={classes.toolbarTitle}>
-                        <Select
-                            labelId="demo-customized-select-label"
-                            id="demo-customized-select"
-                            value={selected}
-                            onChange={handleChange}
-                            input={<BootstrapInput/>}
-                            className={classes.select}
-                        >
-                            {selectOptions.map((item, indexed) => (
-                                <MenuItem value={item} key={indexed}>{item.name} </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Typography>
+                <div className={classes.toolbarTitle}>
+                    <div className={classes.headerTitle}>
+                        <Typography variant={"body1"}> Geyser</Typography>
+                        <FormControl>
+                            <Select
+                                labelId="demo-customized-select-label"
+                                id="demo-customized-select"
+                                value={selected}
+                                onChange={handleChange}
+                                input={<BootstrapInput/>}
+                                className={classes.select}
+                                renderValue={data => data.name}
+                            >
+                                {selectOptions.map((item, indexed) => (
+                                    <MenuItem value={item} key={indexed}>{item.name} </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <img src={CoinBase} alt={"Coinbase Wallet"} className={classes.icon}
+                             onClick={handleGo}/>&nbsp;<span className={classes.itemText}>Uniswap</span>
+                    </div>
+                </div>
 
 
                 {connected ? (<div className="NavbarWeb3AccountContainer">

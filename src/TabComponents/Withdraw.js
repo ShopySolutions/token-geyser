@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import {fade, InputBase} from "@material-ui/core";
 import {TokenGeyserContext} from "../Context/TokenGeyserContext";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -94,6 +96,10 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#7424CC',
             color: '#fff',
         }
+    },
+    backdrop: {
+        color: '#000',
+        backgroundColor:"#fff"
     }
 }));
 
@@ -137,101 +143,115 @@ const BootstrapInput = withStyles((theme) => ({
 function Withdraw() {
     const classes = useStyles();
     const {openAccountPopup, setOpenAccountPopUp, connected} = useContext(TokenGeyserContext)
+    const [loading, setLoading] = useState(true)
 
     const [value, setValue] = useState(null)
     const handleChangeAmount = (event) => {
         setValue(event.target.value)
     }
+    setInterval(function () {
+        setLoading(false)
+    }, 1000);
+
 
     const handleInsufficientBalance = () => {
 
     }
     return (
-        <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
-
-            <Grid item md={12}>
-                <Typography variant={"body1"} className={classes.amount}>Deposited: 0.000000&nbsp;<span
-                    className="small-text">(MOON-V1-BZRX-AMPL)</span></Typography>
-                <FormControl className={classes.margin} fullWidth={true}>
-                    <BootstrapInput type={"number"} id="bootstrap-input" placeholder={"Enter Amount"}
-                                    onChange={handleChangeAmount}/>
-                </FormControl>
-            </Grid>
-
-
-            <Grid item md={6}>
-                <Paper elevation={0} variant="elevation" className={classes.box}>
-                    <Grid container spacing={0} alignItems="center" justify={"center"}>
-                        <Grid item md={12}>
-                            <Typography variant={"body1"}
-                                        className={classes.bodyText}>Amount to Withdraw
-                            </Typography>
-                        </Grid>
-                        <Grid item md={12}>
-                            <Typography variant={"body1"}
-                                        className={classes.price}>0 $MOON-V1-BZRX-AMPL
-                            </Typography>
-                        </Grid>
+        <>
+            {loading === true ? (
+                <Backdrop className={classes.backdrop} open={loading}>
+                    <CircularProgress color="inherit"/>
+                </Backdrop>
+            ) : (
+                <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
+                    <Grid item md={12}>
+                        <Typography variant={"body1"} className={classes.amount}>Deposited: 0.000000&nbsp;<span
+                            className="small-text">(MOON-V1-BZRX-AMPL)</span></Typography>
+                        <FormControl className={classes.margin} fullWidth={true}>
+                            <BootstrapInput type={"number"} id="bootstrap-input" placeholder={"Enter Amount"}
+                                            onChange={handleChangeAmount}/>
+                        </FormControl>
                     </Grid>
-                </Paper>
-            </Grid>
-            <Grid item md={6}>
-                <Paper elevation={0} variant="elevation" className={classes.box}>
-                    <Grid container spacing={0} alignItems="center" justify={"center"}>
-                        <Grid item md={12}>
-                            <Typography variant={"body1"}
-                                        className={classes.bodyText}>Rewards Claimed
-                            </Typography>
-                        </Grid>
-                        <Grid item md={12}>
-                            <Typography variant={"body1"}
-                                        className={classes.price}>0.00 AMPL
-                            </Typography>
-                        </Grid>
+
+
+                    <Grid item md={6}>
+                        <Paper elevation={0} variant="elevation" className={classes.box}>
+                            <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                <Grid item md={12}>
+                                    <Typography variant={"body1"}
+                                                className={classes.bodyText}>Amount to Withdraw
+                                    </Typography>
+                                </Grid>
+                                <Grid item md={12}>
+                                    <Typography variant={"body1"}
+                                                className={classes.price}>0 $MOON-V1-BZRX-AMPL
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Paper>
                     </Grid>
-                </Paper>
-            </Grid>
+                    <Grid item md={6}>
+                        <Paper elevation={0} variant="elevation" className={classes.box}>
+                            <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                <Grid item md={12}>
+                                    <Typography variant={"body1"}
+                                                className={classes.bodyText}>Rewards Claimed
+                                    </Typography>
+                                </Grid>
+                                <Grid item md={12}>
+                                    <Typography variant={"body1"}
+                                                className={classes.price}>0.00 AMPL
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid>
 
 
-            {connected === false?(
-                <Grid item md={12}>
-                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
-                        <Grid container spacing={0} alignItems="center" justify={"center"}>
-                            <Grid item md={10}>
-                                <Typography variant={"body1"} className={classes.connectText}>Connect your ethereum
-                                    wallet
-                                </Typography>
-                            </Grid>
-                            <Grid item md={2}>
-                                <Button size={"large"} variant={"contained"} fullWidth={true}
-                                        onClick={() => setOpenAccountPopUp(true)}
-                                        className={classes.connectButton}>CONNECT</Button>
-                            </Grid>
+                    {connected === false ? (
+                        <Grid item md={12}>
+                            <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                                <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                    <Grid item md={10}>
+                                        <Typography variant={"body1"} className={classes.connectText}>Connect your
+                                            ethereum
+                                            wallet
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item md={2}>
+                                        <Button size={"large"} variant={"contained"} fullWidth={true}
+                                                onClick={() => setOpenAccountPopUp(true)}
+                                                className={classes.connectButton}>CONNECT</Button>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                    </Paper>
-                </Grid>
-            ):""}
+                    ) : ""}
 
 
-            {value !== null ? (
-                <Grid item md={12}>
-                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
-                        <Grid container spacing={0} alignItems="center" justify={"center"}>
-                            <Grid item md={12}>
-                                <Typography variant={"body1"} className={classes.connectText}>Cannot withdraw more than
-                                    your deposit
-                                </Typography>
-                            </Grid>
+                    {value !== null ? (
+                        <Grid item md={12}>
+                            <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                                <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                    <Grid item md={12}>
+                                        <Typography variant={"body1"} className={classes.connectText}>Cannot withdraw
+                                            more than
+                                            your deposit
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                    </Paper>
-                </Grid>
-            ) : ""}
+                    ) : ""}
 
-            <Grid item md={12}>
-                <Button size={"large"} variant={"contained"} fullWidth={true}
-                        className={classes.withdraw}>WITHDRAW</Button>
-            </Grid>
-        </Grid>
+                    <Grid item md={12}>
+                        <Button size={"large"} variant={"contained"} fullWidth={true}
+                                className={classes.withdraw}>WITHDRAW</Button>
+                    </Grid>
+                </Grid>
+            )}
+        </>
     );
 }
 

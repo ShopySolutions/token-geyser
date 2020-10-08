@@ -10,6 +10,8 @@ import Button from "@material-ui/core/Button";
 import {Cached, HelpOutline} from "@material-ui/icons";
 import Tooltip from "@material-ui/core/Tooltip";
 import {TokenGeyserContext} from "../Context/TokenGeyserContext";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -105,6 +107,10 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#7424CC',
             color: '#fff',
         }
+    },
+    backdrop: {
+        color: '#000',
+        backgroundColor:"#fff"
     }
 
 }));
@@ -170,92 +176,104 @@ function BootstrapTooltip(props) {
 function Deposit() {
     const classes = useStyles();
     const {openAccountPopup, setOpenAccountPopUp, connected} = useContext(TokenGeyserContext)
+    const [loading, setLoading] = useState(true)
 
     const [value, setValue] = useState(null)
     const handleChangeAmount = (event) => {
         setValue(event.target.value)
     }
-
+    setInterval(function(){setLoading(false)},1000);
     const handleInsufficientBalance = () => {
         window.location.href = "https://mooniswap.exchange/#/add/0x56d811088235F11C8920698a204A5010a788f4b3/0xD46bA6D942050d489DBd938a2C909A5d5039A161";
     }
     return (
 
-        <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
-            <Grid item md={12}>
-                <Typography variant={"body1"} className={classes.amount}>Deposited: 0.000000&nbsp;<span
-                    className="small-text">(MOON-V1-BZRX-AMPL)</span></Typography>
-                <FormControl className={classes.margin} fullWidth={true}>
-                    <BootstrapInput type={"number"} id="bootstrap-input" placeholder={"Enter Amount"}
-                                    onChange={handleChangeAmount}/>
-                </FormControl>
-            </Grid>
-            <Grid item md={12}>
-                <Paper elevation={0} variant="elevation" className={classes.box}>
-                    <Grid container spacing={0} alignItems="center" justify={"center"}>
-                        <Grid item md={2}>
-                            <Cached className={classes.refresh}/>
-                        </Grid>
-                        <Grid item md={10}>
-                            <Typography variant={"body1"}
-                                        className={classes.bodyText}>Your Estimated Rewards
-                                <BootstrapTooltip title={longText} placement="top">
-                                    <HelpOutline className={classes.helpIcon}/>
-                                </BootstrapTooltip>
-                            </Typography>
-
-                            <Typography variant={"body1"}
-                                        className={classes.price}>0.00 AMPL / month
-                            </Typography>
-                        </Grid>
-
+        <>
+            {loading === true ? (
+                <Backdrop className={classes.backdrop} open={loading}>
+                    <CircularProgress color="inherit"/>
+                </Backdrop>
+            ) : (
+                <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
+                    <Grid item md={12}>
+                        <Typography variant={"body1"} className={classes.amount}>Deposited: 0.000000&nbsp;<span
+                            className="small-text">(MOON-V1-BZRX-AMPL)</span></Typography>
+                        <FormControl className={classes.margin} fullWidth={true}>
+                            <BootstrapInput type={"number"} id="bootstrap-input" placeholder={"Enter Amount"}
+                                            onChange={handleChangeAmount}/>
+                        </FormControl>
                     </Grid>
-                </Paper>
-            </Grid>
+                    <Grid item md={12}>
+                        <Paper elevation={0} variant="elevation" className={classes.box}>
+                            <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                <Grid item md={2}>
+                                    <Cached className={classes.refresh}/>
+                                </Grid>
+                                <Grid item md={10}>
+                                    <Typography variant={"body1"}
+                                                className={classes.bodyText}>Your Estimated Rewards
+                                        <BootstrapTooltip title={longText} placement="top">
+                                            <HelpOutline className={classes.helpIcon}/>
+                                        </BootstrapTooltip>
+                                    </Typography>
 
-            {connected === false ? (
-                <Grid item md={12}>
-                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
-                        <Grid container spacing={0} alignItems="center" justify={"center"}>
-                            <Grid item md={10}>
-                                <Typography variant={"body1"} className={classes.connectText}>Connect your ethereum
-                                    wallet
-                                </Typography>
+                                    <Typography variant={"body1"}
+                                                className={classes.price}>0.00 AMPL / month
+                                    </Typography>
+                                </Grid>
+
                             </Grid>
-                            <Grid item md={2}>
-                                <Button size={"large"} variant={"contained"} fullWidth={true}
-                                        onClick={() => setOpenAccountPopUp(true)}
-                                        className={classes.connectButton}>CONNECT</Button>
-                            </Grid>
+                        </Paper>
+                    </Grid>
+
+                    {connected === false ? (
+                        <Grid item md={12}>
+                            <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                                <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                    <Grid item md={10}>
+                                        <Typography variant={"body1"} className={classes.connectText}>Connect your
+                                            ethereum
+                                            wallet
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item md={2}>
+                                        <Button size={"large"} variant={"contained"} fullWidth={true}
+                                                onClick={() => setOpenAccountPopUp(true)}
+                                                className={classes.connectButton}>CONNECT</Button>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                    </Paper>
-                </Grid>
-            ) : ""}
+                    ) : ""}
 
-            {value !== null ? (
-                <Grid item md={12}>
-                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
-                        <Grid container spacing={0} alignItems="center" justify={"center"}>
-                            <Grid item md={7}>
-                                <Typography variant={"body1"} className={classes.connectText}>Insufficient balance
-                                </Typography>
-                            </Grid>
-                            <Grid item md={5}>
-                                <Button size={"large"} variant={"contained"} fullWidth={true}
-                                        onClick={() => handleInsufficientBalance(true)}
-                                        className={classes.connectButton}>GET MOON-V1-BZRX-AMPL</Button>
-                            </Grid>
+                    {value !== null ? (
+                        <Grid item md={12}>
+                            <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                                <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                    <Grid item md={7}>
+                                        <Typography variant={"body1"} className={classes.connectText}>Insufficient
+                                            balance
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item md={5}>
+                                        <Button size={"large"} variant={"contained"} fullWidth={true}
+                                                onClick={() => handleInsufficientBalance(true)}
+                                                className={classes.connectButton}>GET MOON-V1-BZRX-AMPL</Button>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                    </Paper>
+                    ) : ""}
+
+
+                    <Grid item md={12}>
+                        <Button size={"large"} variant={"contained"} fullWidth={true}
+                                className={classes.withdraw}>WITHDRAW</Button>
+                    </Grid>
                 </Grid>
-            ) : ""}
+            )}
+        </>
 
-
-            <Grid item md={12}>
-                <Button size={"large"} variant={"contained"} fullWidth={true}
-                        className={classes.withdraw}>WITHDRAW</Button>
-            </Grid>
-        </Grid>
     );
 }
 

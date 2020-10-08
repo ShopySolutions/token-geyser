@@ -4,6 +4,8 @@ import {makeStyles} from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -36,11 +38,17 @@ const useStyles = makeStyles((theme) => ({
     stats: {
         marginTop: '20px'
     },
+    backdrop: {
+        color: '#000',
+        backgroundColor:"#fff"
+    }
 }));
 
 
 function Stats() {
     const classes = useStyles();
+    const [loading, setLoading] = useState(true)
+
     const [items, setItem] = useState([
         {
             id: 1,
@@ -73,29 +81,37 @@ function Stats() {
             price: "42,902.73 AMPL / month"
         }
     ])
+    setInterval(function () {
+        setLoading(false)
+    }, 1000);
 
-
-    return (
-        <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
-            {items.map((item, index) => (
-                <Grid item md={6} key={index}>
-                    <Paper elevation={0} variant="elevation" className={classes.box}>
-                        <Grid container spacing={0} alignItems="center" justify={"center"}>
-                            <Grid item md={12}>
-                                <Typography variant={"body1"}
-                                            className={classes.bodyText}>{item.name}
-                                </Typography>
-                            </Grid>
-                            <Grid item md={12}>
-                                <Typography variant={"body1"}
-                                            className={classes.price}>{item.price}
-                                </Typography>
-                            </Grid>
+    return (<>
+            {loading === true ? (
+                <Backdrop className={classes.backdrop} open={loading}>
+                    <CircularProgress color="inherit"/>
+                </Backdrop>
+            ) : (
+                <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
+                    {items.map((item, index) => (
+                        <Grid item md={6} key={index}>
+                            <Paper elevation={0} variant="elevation" className={classes.box}>
+                                <Grid container spacing={0} alignItems="center" justify={"center"}>
+                                    <Grid item md={12}>
+                                        <Typography variant={"body1"}
+                                                    className={classes.bodyText}>{item.name}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item md={12}>
+                                        <Typography variant={"body1"}
+                                                    className={classes.price}>{item.price}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                    </Paper>
-                </Grid>
-            ))}
-        </Grid>
+                    ))}
+                </Grid>)}
+        </>
     );
 }
 
