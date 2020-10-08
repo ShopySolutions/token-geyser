@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../App.css'
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import {InputBase} from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
+import {TokenGeyserContext} from "../Context/TokenGeyserContext";
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -51,6 +52,18 @@ const useStyles = makeStyles((theme) => ({
         top: '0px',
         left: '-5px',
         borderRadius: '15px'
+    },
+    conect: {
+        color: 'white',
+        textTransform: 'uppercase',
+        backgroundColor: '#FF2D55',
+        boxShadow: 'none',
+        "&:hover":{
+            color: 'white',
+            textTransform: 'uppercase',
+            backgroundColor: '#FF2D55',
+            boxShadow: 'none',
+        }
     }
 
 }));
@@ -93,6 +106,8 @@ const BootstrapInput = withStyles((theme) => ({
 
 function Header() {
     const classes = useStyles();
+    const {openAccountPopup, setOpenAccountPopUp, connected, setConnected, setConnectedName, connectedName} = useContext(TokenGeyserContext)
+
 
     const [selectOptions, setSelectOptions] = useState([{
         id: 1,
@@ -158,7 +173,8 @@ function Header() {
                     </FormControl>
                 </Typography>
 
-                <div className="NavbarWeb3AccountContainer">
+
+                {connected ? (<div className="NavbarWeb3AccountContainer">
                     <Button variant={"contained"}
                             className={classes.walletButton}
                             tabIndex="0" type="button">
@@ -167,7 +183,14 @@ function Header() {
                              className={classes.walletIcon}
                         />0x14f2..4a08</span>
                     </Button>
-                </div>
+                </div>) : (
+
+
+                    <Button variant={"contained"} size={"small"}
+                            onClick={() => setOpenAccountPopUp(true)} className={classes.conect}>CONNECT</Button>
+
+                )}
+
 
             </Toolbar>
         </AppBar>

@@ -169,11 +169,15 @@ function BootstrapTooltip(props) {
 
 function Deposit() {
     const classes = useStyles();
-    const {openAccountPopup, setOpenAccountPopUp} = useContext(TokenGeyserContext)
+    const {openAccountPopup, setOpenAccountPopUp, connected} = useContext(TokenGeyserContext)
 
     const [value, setValue] = useState(null)
     const handleChangeAmount = (event) => {
         setValue(event.target.value)
+    }
+
+    const handleInsufficientBalance = () => {
+        window.location.href = "https://mooniswap.exchange/#/add/0x56d811088235F11C8920698a204A5010a788f4b3/0xD46bA6D942050d489DBd938a2C909A5d5039A161";
     }
     return (
 
@@ -209,21 +213,43 @@ function Deposit() {
                 </Paper>
             </Grid>
 
+            {connected === false ? (
+                <Grid item md={12}>
+                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                        <Grid container spacing={0} alignItems="center" justify={"center"}>
+                            <Grid item md={10}>
+                                <Typography variant={"body1"} className={classes.connectText}>Connect your ethereum
+                                    wallet
+                                </Typography>
+                            </Grid>
+                            <Grid item md={2}>
+                                <Button size={"large"} variant={"contained"} fullWidth={true}
+                                        onClick={() => setOpenAccountPopUp(true)}
+                                        className={classes.connectButton}>CONNECT</Button>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                </Grid>
+            ) : ""}
 
-            <Grid item md={12}>
-                <Paper elevation={0} variant="elevation" className={classes.connectBox}>
-                    <Grid container spacing={0} alignItems="center" justify={"center"}>
-                        <Grid item md={10}>
-                            <Typography variant={"body1"} className={classes.connectText}>Connect your ethereum wallet
-                            </Typography>
+            {value !== null ? (
+                <Grid item md={12}>
+                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                        <Grid container spacing={0} alignItems="center" justify={"center"}>
+                            <Grid item md={7}>
+                                <Typography variant={"body1"} className={classes.connectText}>Insufficient balance
+                                </Typography>
+                            </Grid>
+                            <Grid item md={5}>
+                                <Button size={"large"} variant={"contained"} fullWidth={true}
+                                        onClick={() => handleInsufficientBalance(true)}
+                                        className={classes.connectButton}>GET MOON-V1-BZRX-AMPL</Button>
+                            </Grid>
                         </Grid>
-                        <Grid item md={2}>
-                            <Button size={"large"} variant={"contained"} fullWidth={true} onClick={()=>setOpenAccountPopUp(true)}
-                                    className={classes.connectButton}>CONNECT</Button>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            </Grid>
+                    </Paper>
+                </Grid>
+            ) : ""}
+
 
             <Grid item md={12}>
                 <Button size={"large"} variant={"contained"} fullWidth={true}

@@ -6,14 +6,19 @@ export const TokenGeyserContext = createContext(initialState)
 
 
 export const TokenGeyserProvider = ({children}) => {
-    const [openAccountPopup, setOpenAccountPopUp] = useState(true)
+    const [openAccountPopup, setOpenAccountPopUp] = useState(false)
+    const [connected, setConnected] = useState(false)
+    const [connectedName, setConnectedName] = useState('')
 
 
     return (
         <TokenGeyserContext.Provider
             value={{
                 openAccountPopup,
-                setOpenAccountPopUp
+                setOpenAccountPopUp,
+                connected,
+                setConnected,
+                setConnectedName, connectedName
             }}
         >{children}</TokenGeyserContext.Provider>
     )

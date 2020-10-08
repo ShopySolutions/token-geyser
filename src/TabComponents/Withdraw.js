@@ -136,11 +136,15 @@ const BootstrapInput = withStyles((theme) => ({
 
 function Withdraw() {
     const classes = useStyles();
-    const {openAccountPopup, setOpenAccountPopUp} = useContext(TokenGeyserContext)
+    const {openAccountPopup, setOpenAccountPopUp, connected} = useContext(TokenGeyserContext)
 
     const [value, setValue] = useState(null)
     const handleChangeAmount = (event) => {
         setValue(event.target.value)
+    }
+
+    const handleInsufficientBalance = () => {
+
     }
     return (
         <Grid container spacing={2} alignItems="center" justify={"center"} className={classes.stats}>
@@ -188,21 +192,40 @@ function Withdraw() {
                 </Paper>
             </Grid>
 
-            <Grid item md={12}>
-                <Paper elevation={0} variant="elevation" className={classes.connectBox}>
-                    <Grid container spacing={0} alignItems="center" justify={"center"}>
-                        <Grid item md={10}>
-                            <Typography variant={"body1"} className={classes.connectText}>Connect your ethereum wallet
-                            </Typography>
-                        </Grid>
-                        <Grid item md={2}>
-                            <Button size={"large"} variant={"contained"} fullWidth={true}  onClick={()=>setOpenAccountPopUp(true)}
-                                    className={classes.connectButton}>CONNECT</Button>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            </Grid>
 
+            {connected === false?(
+                <Grid item md={12}>
+                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                        <Grid container spacing={0} alignItems="center" justify={"center"}>
+                            <Grid item md={10}>
+                                <Typography variant={"body1"} className={classes.connectText}>Connect your ethereum
+                                    wallet
+                                </Typography>
+                            </Grid>
+                            <Grid item md={2}>
+                                <Button size={"large"} variant={"contained"} fullWidth={true}
+                                        onClick={() => setOpenAccountPopUp(true)}
+                                        className={classes.connectButton}>CONNECT</Button>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                </Grid>
+            ):""}
+
+
+            {value !== null ? (
+                <Grid item md={12}>
+                    <Paper elevation={0} variant="elevation" className={classes.connectBox}>
+                        <Grid container spacing={0} alignItems="center" justify={"center"}>
+                            <Grid item md={12}>
+                                <Typography variant={"body1"} className={classes.connectText}>Cannot withdraw more than
+                                    your deposit
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                </Grid>
+            ) : ""}
 
             <Grid item md={12}>
                 <Button size={"large"} variant={"contained"} fullWidth={true}
