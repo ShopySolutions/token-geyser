@@ -5,9 +5,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import {HelpOutline, Phone} from "@material-ui/icons";
+import {HelpOutline} from "@material-ui/icons";
 import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/styles";
 import Popper from "@material-ui/core/Popper";
@@ -111,12 +110,6 @@ function Main() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
     const [placement, setPlacement] = React.useState();
-    const handleClick = (newPlacement) => (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpen((prev) => placement !== newPlacement || !prev);
-        setPlacement(newPlacement);
-    };
-
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {

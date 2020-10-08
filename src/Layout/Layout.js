@@ -5,6 +5,7 @@ import {makeStyles} from "@material-ui/styles";
 import Header from "./Header";
 import Main from "./Main";
 import AccountModal from "./AccountModal";
+import Footer from "./Footer";
 
 function Copyright() {
     return (
@@ -33,6 +34,7 @@ function Layout() {
             <Main/>
             <AccountModal/>
             {/* Footer */}
+            <Footer/>
             {/* End footer */}
         </React.Fragment>
     );
