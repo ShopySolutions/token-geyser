@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../App.css'
 import {makeStyles, withStyles} from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
@@ -9,6 +9,7 @@ import {fade, InputBase} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {Cached, HelpOutline} from "@material-ui/icons";
 import Tooltip from "@material-ui/core/Tooltip";
+import {TokenGeyserContext} from "../Context/TokenGeyserContext";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -168,6 +169,8 @@ function BootstrapTooltip(props) {
 
 function Deposit() {
     const classes = useStyles();
+    const {openAccountPopup, setOpenAccountPopUp} = useContext(TokenGeyserContext)
+
     const [value, setValue] = useState(null)
     const handleChangeAmount = (event) => {
         setValue(event.target.value)
@@ -215,7 +218,7 @@ function Deposit() {
                             </Typography>
                         </Grid>
                         <Grid item md={2}>
-                            <Button size={"large"} variant={"contained"} fullWidth={true}
+                            <Button size={"large"} variant={"contained"} fullWidth={true} onClick={()=>setOpenAccountPopUp(true)}
                                     className={classes.connectButton}>CONNECT</Button>
                         </Grid>
                     </Grid>

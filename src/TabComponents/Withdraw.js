@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../App.css'
 import {makeStyles, withStyles} from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import {fade, InputBase} from "@material-ui/core";
+import {TokenGeyserContext} from "../Context/TokenGeyserContext";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -135,6 +136,8 @@ const BootstrapInput = withStyles((theme) => ({
 
 function Withdraw() {
     const classes = useStyles();
+    const {openAccountPopup, setOpenAccountPopUp} = useContext(TokenGeyserContext)
+
     const [value, setValue] = useState(null)
     const handleChangeAmount = (event) => {
         setValue(event.target.value)
@@ -193,7 +196,7 @@ function Withdraw() {
                             </Typography>
                         </Grid>
                         <Grid item md={2}>
-                            <Button size={"large"} variant={"contained"} fullWidth={true}
+                            <Button size={"large"} variant={"contained"} fullWidth={true}  onClick={()=>setOpenAccountPopUp(true)}
                                     className={classes.connectButton}>CONNECT</Button>
                         </Grid>
                     </Grid>

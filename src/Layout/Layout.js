@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/styles";
 import Header from "./Header";
 import Main from "./Main";
+import {TokenGeyserContext} from "../Context/TokenGeyserContext";
+import Modal from "@material-ui/core/Modal";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
 
 
 function Copyright() {
@@ -96,32 +104,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-
-
 function Layout() {
     const classes = useStyles();
+    const {openAccountPopup, setOpenAccountPopUp} = useContext(TokenGeyserContext)
 
     return (
         <React.Fragment>
             <Header/>
             {/* End hero unit */}
 
-
             <Main/>
 
+
+            <Dialog
+                open={openAccountPopup}
+                onClose={()=>setOpenAccountPopUp(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Let Google help apps determine location. This means sending anonymous location data to
+                        Google, even when no apps are running.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={()=>setOpenAccountPopUp(false)} color="primary">
+                        Disagree
+                    </Button>
+                    <Button onClick={()=>setOpenAccountPopUp(false)} color="primary" autoFocus>
+                        Agree
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+
             {/* Footer */}
-
-
-
-
             {/* End footer */}
-
-
-
-
-
         </React.Fragment>
     );
 }
