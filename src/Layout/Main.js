@@ -210,8 +210,6 @@ function Main() {
                                 {value === 1 ? <Withdraw/> : ""}
                                 {value === 2 ? <Stats/> : ""}
                             </Grid>
-
-
                         </CardContent>
                         <CardActions>
                         </CardActions>
